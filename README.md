@@ -1,29 +1,41 @@
-# Terraform AWS IAM Role for GitHub Actions
+<!-- BEGIN_TF_DOCS -->
+## Requirements
 
-This repository provides a Terraform module to create an IAM role with the necessary permissions and trust policies for GitHub Actions to manage AWS Organizations resources.
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.8.4 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.51.0 |
 
-## Usage
+## Providers
 
-### Module
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 5.51.0 |
 
-```hcl
-module "github_actions_iam_role" {
-  source = "github.com/infraspecdev/terraform-aws-github-actions-iam-role?ref=main"
+## Modules
 
-  aws_account_id   = "YOUR_AWS_ACCOUNT_ID"
-  github_username  = "YOUR_GITHUB_USERNAME"
-  repository_names = "YOUR_REPO_NAMES"
-  role_name        = "GitHubActionsRole"
-}
-```
+No modules.
 
-## Variables
+## Resources
 
-- **aws_account_id**: The AWS Account ID where the IAM role will be created.
-- **github_username**: The GitHub username or organization name.
-- **repository_names**: The list of GitHub repository names.
-- **role_name**: (Optional) The name of the IAM role. Default is `GitHubActionsRole`.
+| Name | Type |
+|------|------|
+| [aws_iam_role.github_actions_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role_policy_attachment.attach_admin_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_iam_policy_document.assume_role_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_aws_account_id"></a> [aws\_account\_id](#input\_aws\_account\_id) | The AWS Account ID | `string` | n/a | yes |
+| <a name="input_github_username"></a> [github\_username](#input\_github\_username) | The name of the GitHub user or organization that owns the repository(ies) the role will use. | `string` | n/a | yes |
+| <a name="input_repository_names"></a> [repository\_names](#input\_repository\_names) | List of names of the GitHub repository that will be allowed to assume the role. | `list(string)` | n/a | yes |
+| <a name="input_role_name"></a> [role\_name](#input\_role\_name) | The name of the IAM Role to be created. | `string` | `"GitHubActionsRole"` | no |
 
 ## Outputs
 
-- **role_arn**: The ARN of the IAM role.
+| Name | Description |
+|------|-------------|
+| <a name="output_role_arn"></a> [role\_arn](#output\_role\_arn) | The ARN of the IAM role |
+<!-- END_TF_DOCS -->
