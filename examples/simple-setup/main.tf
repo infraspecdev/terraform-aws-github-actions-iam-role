@@ -4,4 +4,7 @@ module "github_actions_iam_role" {
   github_username  = var.github_username
   repository_names = var.repository_names
   role_name        = var.role_name
+  providers = {
+    aws = aws.root
+  }
 }
