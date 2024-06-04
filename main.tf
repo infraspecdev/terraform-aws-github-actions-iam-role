@@ -4,7 +4,6 @@ resource "aws_iam_openid_connect_provider" "github_oidc_connect" {
   client_id_list = [
     "sts.amazonaws.com",
   ]
-
   thumbprint_list = ["ffffffffffffffffffffffffffffffffffffffff"]
 }
 resource "aws_iam_role" "github_actions_role" {
